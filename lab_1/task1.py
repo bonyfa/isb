@@ -10,7 +10,7 @@ SETTINGS = os.path.join("1", "settings.json")
 
 
 def encryption_text(text_path: str, key_path: str) -> str:
-
+    """The function receives a directory with text and a key and encrypts the text"""
     try:
         text = read_text_from_file(text_path)
         encr_text = text.upper()
