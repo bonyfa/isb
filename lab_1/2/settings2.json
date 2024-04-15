@@ -4,5 +4,7 @@
   "fold_task": "2",
   "original_txt": "text2.txt",
   "result_txt": "result2.txt",
-  "frequency": "frequency.json"
+  "frequency": "frequency.json",
+  "alphabet": " оиеантсрвмлдякпзыьучжгхфйюбцщэъ\n",
+  "new alphabet": ""
 }
