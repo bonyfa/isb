@@ -6,7 +6,7 @@ from read_save_makedict import read_text_from_file,save_text_to_file,json_to_dic
 
 logging.basicConfig(level=logging.INFO)
 
-SETTINGS = os.path.join("1", "settings.json")
+SETTINGS = os.path.join("1", "settings1.json")
 
 
 def encryption_text(text_path: str, key_path: str) -> str:

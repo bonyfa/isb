@@ -28,14 +28,18 @@ def count_the_frequency(text_path: str) -> dict:
 
 def decryption_text(text_path: str, key_path: str) -> str:
     """The function receives a directory with text and a key and encrypts the text"""
+    """The function receives a directory with text and a key and encrypts the text"""
     try:
         text = read_text_from_file(text_path)
         encr_text = text.upper()
         key = json_to_dict(key_path)
         keys = key.keys()
         for k in keys:
-            k.upper()
-            encr_text = encr_text.replace(k, key[k].lower())
+            if key[k] != " ":
+                encr_text = encr_text.replace(k, key[k].lower())
+            else:
+                l = k
+        encr_text = encr_text.replace(l, key[l].lower())
         return encr_text
     except Exception as ex:
         logging.error(f"Wrong dictionary - {ex}")
@@ -57,8 +61,9 @@ if __name__ == "__main__":
                                settings["fold_task"],
                                settings["frequency"])
     freq = count_the_frequency(txt_path)
-    dict_to_json(key_path, dict(zip(freq.keys(), settings["alphabet"])))
+    dict_to_json(key_path, dict(zip(settings["new alphabet"], settings["alphabet"])))
     print(freq.keys())
-    print(settings["alphabet"])
+    print(settings["alphabet"].upper())
+    print(dict(zip(settings["new alphabet"], settings["alphabet"].upper())))
     save_text_to_file(decryption_text(txt_path, key_path), result_path)
 
