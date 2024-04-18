@@ -2,7 +2,7 @@ import json
 import logging
 import os.path
 
-from read_save_makedict import read_text_from_file,save_text_to_file,json_to_dict
+from read_save_makedict import read_text_from_file, save_text_to_file, json_to_dict
 
 logging.basicConfig(level=logging.INFO)
 

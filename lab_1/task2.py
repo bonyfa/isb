@@ -2,12 +2,11 @@ import json
 import logging
 import os.path
 
-from read_save_makedict import read_text_from_file,save_text_to_file,json_to_dict , dict_to_json
+from read_save_makedict import read_text_from_file, save_text_to_file, json_to_dict, dict_to_json
 
 logging.basicConfig(level=logging.INFO)
 
 SETTINGS = os.path.join("2", "settings2.json")
-
 
 
 def count_the_frequency(text_path: str) -> dict:
@@ -45,7 +44,6 @@ def decryption_text(text_path: str, key_path: str) -> str:
         logging.error(f"Wrong dictionary - {ex}")
 
 
-
 if __name__ == "__main__":
     settings = json_to_dict(SETTINGS)
     txt_path = os.path.join(
@@ -62,8 +60,5 @@ if __name__ == "__main__":
                                settings["frequency"])
     freq = count_the_frequency(txt_path)
     dict_to_json(key_path, dict(zip(settings["new alphabet"], settings["alphabet"])))
-    print(freq.keys())
-    print(settings["alphabet"].upper())
-    print(dict(zip(settings["new alphabet"], settings["alphabet"].upper())))
     save_text_to_file(decryption_text(txt_path, key_path), result_path)
 
