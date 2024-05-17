@@ -18,6 +18,19 @@ def bit_test(str: str)-> float:
     except Exception as ex:
         logging.error(f"Wrong str - {ex}")
 
+def test_identical_consecutive_bits(str: str) -> float:
+    try:
+        str1 = list(str)
+        l = 1/len(str1) * sum(str1)
+        if ((fabs(l - 0.5)) >=(2 / sqrt(len(str1)))):
+            return 0.0
+        Vn = 0
+        for i in range (len(str1)-1):
+            Vn += 0 if str1[i] == str[i+1] else 1
+        p = erfc((fabs(Vn - 2*len(str1)*l*(1-l)))/(2 * sqrt(2 * len(str1)) * l * (1-l)))
+        return p
+    except Exception as ex:
+        logging.error(f"Wrong str - {ex}")
 
 
 
