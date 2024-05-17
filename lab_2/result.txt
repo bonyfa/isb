@@ -1,0 +1,7 @@
+Results for C++ sequence
+0.4795001221869535
+None
+
+Results for Java sequence
+0.7236736098317631
+None

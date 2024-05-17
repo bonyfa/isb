@@ -6,25 +6,27 @@ from mpmath import gammainc
 
 logging.basicConfig(level=logging.INFO)
 
-SETTINGS =("sequence.json")
+SETTINGS = os.path.join("sequence.json")
+RESULT_PATH = os.path.join("result.txt")
 PI_I = {0:0.2148, 1:0.3672, 2:0.2305, 3:0.1875}
 
-def bit_test(str: str)-> float:
+
+def bit_test(sequence: str)-> float:
     try:
-        summa = 0
-        str1 = str.replace("0","-1")
-        str1 = list(str1)
-        sn = 1 / sqrt(len(str1)) * sum(str1)
-        p = erfc(sn / sqrt(2))
+        str1 = list(map(float,sequence))
+        result_seq = [-1 if x == 0 else x for x in str1]
+        result_sum = fabs(sum(result_seq)) / sqrt(len(result_seq))
+        p = erfc(result_sum / sqrt(2))
         return p
     except Exception as ex:
-        logging.error(f"Wrong str - {ex}")
+        logging.error(f"Invalid sequence : {ex}")
+
 
 def test_identical_consecutive_bits(str: str) -> float:
     try:
         str1 = list(str)
         l = 1/len(str1) * sum(str1)
-        if ((fabs(l - 0.5)) >=(2 / sqrt(len(str1)))):
+        if ((fabs(l - 0.5)) >= (2 / sqrt(len(str1)))):
             return 0.0
         Vn = 0
         for i in range (len(str1)-1):
@@ -71,14 +73,14 @@ if __name__ == "__main__":
 
     with open(RESULT_PATH, 'w', encoding='utf-8') as f:
         f.write("Results for C++ sequence\n")
-        f.write(str(frequency_bit_test(cpp_seq)) + '\n')
-        f.write(str(identical_consecutive_bits(cpp_seq)) + '\n')
-        f.write(str(longest_sequence_of_ones_in_the_block(cpp_seq)) + '\n')
+        f.write(str(bit_test(cpp_seq)) + '\n')
+        f.write(str(test_identical_consecutive_bits(cpp_seq)) + '\n')
+       # f.write(str(test_longest_sequence_of_ones(cpp_seq)) + '\n')
 
         f.write("\nResults for Java sequence\n")
-        f.write(str(frequency_bit_test(java_seq)) + '\n')
-        f.write(str(identical_consecutive_bits(java_seq)) + '\n')
-        f.write(str(longest_sequence_of_ones_in_the_block(java_seq)) + '\n')
+        f.write(str(bit_test(java_seq)) + '\n')
+        f.write(str(test_identical_consecutive_bits(java_seq)) + '\n')
+        #f.write(str(test_longest_sequence_of_ones(java_seq)) + '\n')
 
 
 
