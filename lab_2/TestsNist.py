@@ -1,6 +1,7 @@
 import json
 import logging
 import os.path
+
 from math import erfc, fabs, sqrt, pow
 from mpmath import gammainc
 
@@ -12,6 +13,14 @@ PI_I = {0:0.2148, 1:0.3672, 2:0.2305, 3:0.1875}
 
 
 def bit_test(sequence: str) -> float:
+    """
+        Performs a bit frequency test
+
+        Parameters:
+        sequence: str - sequence to be processed
+
+        Return: float - Probability of a random sequence
+    """
     try:
         str1 = list(map(float,sequence))
         result_seq = [-1 if x == 0 else x for x in str1]
@@ -23,6 +32,14 @@ def bit_test(sequence: str) -> float:
 
 
 def test_identical_consecutive_bits(sequence: str) -> float:
+    """
+       Performs a test for identical consecutive bits
+
+       Parameters:
+       sequence: str - sequence to be processed
+
+       Return: float - Probability of a random sequence
+       """
     try:
         str1 = list(map(float, sequence))
 
@@ -39,6 +56,14 @@ def test_identical_consecutive_bits(sequence: str) -> float:
 
 
 def test_longest_sequence_of_ones(sequence: str) -> float:
+    """
+        Performs a Test for the longest sequence of ones in a block
+
+        Parameters:
+        sequence:str - sequence to be processed
+
+        Return: float - Probability of a random sequence
+        """
     try:
         str1 = list(map(int, sequence))
         block_size = 8
@@ -49,14 +74,17 @@ def test_longest_sequence_of_ones(sequence: str) -> float:
             while once in ''.join(map(str,block)):
                 once += "1"
             once = once[:-1]
-            if once.count("1") <= 1:
-                v_i[1] += 1
-            if once.count("1") == 2:
-                v_i[2] += 1
-            if once.count("1") == 3:
-                v_i[3] += 1
-            if once.count("1") >= 4:
-                v_i[4] += 1
+            match once:
+                case 0 | 1:
+                    v_i[1] += 1
+                case 2:
+                    v_i[2] += 1
+                case 3:
+                    v_i[3] += 1
+                case 4 | 5 | 6 | 7 | 8:
+                    v_i[4] += 1
+                case _:
+                    pass
         x_square = 0
         for i in range(4):
             x_square += pow(v_i[i + 1] - 16 * PI_I[i], 2) / (16 * PI_I[i])

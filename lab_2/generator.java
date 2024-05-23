@@ -1,6 +1,7 @@
 import java.security.SecureRandom;
 
 public class Main {
+    
     public static void main(String[] args) {
         // Инициализация генератора случайных чисел
         SecureRandom secureRandom = new SecureRandom();
