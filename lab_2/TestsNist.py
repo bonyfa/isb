@@ -95,22 +95,25 @@ def test_longest_sequence_of_ones(sequence: str) -> float:
 
 
 if __name__ == "__main__":
-    with open(SETTINGS, 'r', encoding='utf-8') as f:
-        sequence = json.load(f)
-
+    try:
+        with open(SETTINGS, 'r', encoding='utf-8') as f:
+            sequence = json.load(f)
+    except FileNotFoundError:
+        print(f"Ошибка: файл '{SETTINGS}' не найден.")
     cpp_seq = sequence['cpp']
     java_seq = sequence['java']
+    try:
+        with open(RESULT_PATH, 'w', encoding='utf-8') as f:
+            f.write("Results for C++ sequence\n")
+            f.write(str(bit_test(cpp_seq)) + '\n')
+            f.write(str(test_identical_consecutive_bits(cpp_seq)) + '\n')
+            f.write(str(test_longest_sequence_of_ones(cpp_seq)) + '\n')
 
-    with open(RESULT_PATH, 'w', encoding='utf-8') as f:
-        f.write("Results for C++ sequence\n")
-        f.write(str(bit_test(cpp_seq)) + '\n')
-        f.write(str(test_identical_consecutive_bits(cpp_seq)) + '\n')
-        f.write(str(test_longest_sequence_of_ones(cpp_seq)) + '\n')
-
-        f.write("\nResults for Java sequence\n")
-        f.write(str(bit_test(java_seq)) + '\n')
-        f.write(str(test_identical_consecutive_bits(java_seq)) + '\n')
-        f.write(str(test_longest_sequence_of_ones(java_seq)) + '\n')
-
+            f.write("\nResults for Java sequence\n")
+            f.write(str(bit_test(java_seq)) + '\n')
+            f.write(str(test_identical_consecutive_bits(java_seq)) + '\n')
+            f.write(str(test_longest_sequence_of_ones(java_seq)) + '\n')
+    except FileNotFoundError:
+        print(f"Ошибка: файл '{RESULT_PATH}' не найден.")
 
 
