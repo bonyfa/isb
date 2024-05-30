@@ -98,8 +98,8 @@ if __name__ == "__main__":
     try:
         with open(SETTINGS, 'r', encoding='utf-8') as f:
             sequence = json.load(f)
-    except FileNotFoundError:
-        print(f"Ошибка: файл '{SETTINGS}' не найден.")
+    except Exception as ex:
+            logging.error(f"Incorrect path - {ex}")
     cpp_seq = sequence['cpp']
     java_seq = sequence['java']
     try:
@@ -113,7 +113,7 @@ if __name__ == "__main__":
             f.write(str(bit_test(java_seq)) + '\n')
             f.write(str(test_identical_consecutive_bits(java_seq)) + '\n')
             f.write(str(test_longest_sequence_of_ones(java_seq)) + '\n')
-    except FileNotFoundError:
-        print(f"Ошибка: файл '{RESULT_PATH}' не найден.")
+    except Exception as ex:
+            logging.error(f"Incorrect path - {ex}")
 
 
