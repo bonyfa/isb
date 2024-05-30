@@ -4,6 +4,7 @@ from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from Workwithfile import read_data, deserialization_symmetric_key, write_data_bytes, read_data_bytes,  write_data
 
+
 class BlowFishCipher:
     """
         Class providing methods for symmetric cryptography operations.
@@ -15,6 +16,7 @@ class BlowFishCipher:
             """
         return os.urandom(sym_key_length//8)
 
+    @staticmethod
     def encrypt_text(self,
                      path_text: str,
                      path_encr_text: str,
@@ -54,5 +56,6 @@ class BlowFishCipher:
         unpadder = padding.PKCS7(128).unpadder()
         unpadded_dc_text = unpadder.update(dc_text) + unpadder.finalize()
         result_text = unpadded_dc_text.decode('utf-8')
+
         write_data(result_text, path_decry_text)
         return result_text
