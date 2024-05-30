@@ -1,0 +1,21 @@
+{
+    "generation": {
+        "rsa_private_key_path": "lab_3/keys/private.pem",
+        "rsa_public_key_path": "lab_3/keys/public.pem",
+        "symmetric_key_path": "lab_3/keys/symmetric.key"
+    },
+
+    "encryption": {
+        "input_text": "lab_3/texts/input_text.txt",
+        "rsa_private_key_path": "lab_3/keys/private.pem",
+        "encrypted_text_path": "lab_3/texts/encrypted_text.txt",
+        "symmetric_key_path": "lab_3/keys/symmetric.key"
+    },
+
+    "decryption": {
+        "decrypted_text_path": "lab_3/texts/decrypted_text.txt",
+        "rsa_private_key_path": "lab_3/keys/private.pem",
+        "encrypted_text_path": "lab_3/texts/encrypted_text.txt",
+        "symmetric_key_path": "lab_3/keys/symmetric.key"
+    }
+}
